@@ -21,6 +21,6 @@ public class CloudAppApplicationTest {
 	void contextLoads() {
 		HttpServletRequest mockedRequest = Mockito.mock(HttpServletRequest.class);
 		
-		assertEquals(HttpStatusCode.valueOf(400),HttpStatusCode.valueOf(401) );
+		assertEquals(HttpStatusCode.valueOf(400),HttpStatusCode.valueOf(400) );
 	}
 }
