@@ -1,4 +1,4 @@
-package com.neu.cloud.cloudapp.controller;
+package com.webapp.webapp.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +17,5 @@ public class UserController {
 		logger.info("ping for app health check");
 		return new ResponseEntity<>(HttpStatusCode.valueOf(200));
 	}
-
 
 }
