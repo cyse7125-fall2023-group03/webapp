@@ -14,9 +14,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    // Checkout source code from your Git repository
+                // Checkout source code from your Git repository
                     git branch: 'main',
-                        credentialsId: 'github-token-jenkins',
+                        credentialsId: 'github-token-jenkins'
                         url: 'https://github.com/cyse7125-fall2023-group03/webapp.git'
                 }
             }
@@ -27,9 +27,9 @@ pipeline {
                 script {
                     // Define the image name and tag based on your repository
                     def imageName = "${env.QUAY_IO_REGISTRY}/${env.QUAY_IO_REPOSITORY_PREFIX}${env.JOB_NAME}"
-                    def imageTag = "v_${BUILD_NUMBER}"
+                    // def imageTag = "${BUILD_NUMBER}"
                     // Build the Docker image
-                    docker.build("-t ${imageName}:${imageTag} .")
+                    docker.build(imageName '.')
                 }
             }
         }
