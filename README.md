@@ -6,10 +6,11 @@ This Project is built using Spring boot, Java, Postgresql, Docker.
 For building and running the application you need:
  - JDK 19
  - maven 3.8.6
- - mysql 8.0.32
+ - Postgresql
  - BCrypt 0.3
  - JUnit 4
  - Mockito
+ - 
 
 ## Steps to Build, Run & Test 
  
