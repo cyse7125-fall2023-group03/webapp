@@ -1,6 +1,6 @@
 {
      "branches": "main",
-     "repositoryUrl": "https://github.com/cyse7125-fall2023-group03/webapp",
+     "repositoryUrl": "https://github.com/cyse7125-fall2023-group03/webapp.git",
      "debug": "true",
      "plugins": [
         "@semantic-release/commit-analyzer",
