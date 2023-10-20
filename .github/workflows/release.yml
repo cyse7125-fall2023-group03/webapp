@@ -1,0 +1,25 @@
+# .github/workflows/release.yml
+
+name: Release
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+     
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.UKK_GH_TOKEN }} 
+        run: npx semantic-release

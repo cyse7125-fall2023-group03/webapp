@@ -18,6 +18,11 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>com.github.semantic-release</groupId>
+				<artifactId>semantic-release</artifactId>
+				<version>17.4.1</version>
+			</dependency>
+			<dependency>
 				<groupId>com.amazonaws</groupId>
 				<artifactId>aws-java-sdk-bom</artifactId>
 				<version>1.12.3</version>
@@ -96,6 +101,7 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
+
 	</dependencies>
 
 	<build>
