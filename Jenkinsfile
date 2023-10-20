@@ -4,7 +4,7 @@ pipeline {
   
     environment {
         // Define Quay.io credentials for pushing images
-        QUAY_IO_CREDENTIALS = 'quay-credentials'
+        QUAY_IO_CREDENTIALS = 'quay-io-credentials'
         QUAY_IO_REGISTRY = 'https://quay.io'
         QUAY_IO_USERNAME = 'udaykirank'
         QUAY_IO_REPOSITORY_PREFIX = 'csye7125group3/webapp-images' // Customize this as needed
