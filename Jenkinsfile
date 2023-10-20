@@ -7,6 +7,7 @@ pipeline {
         QUAY_IO_REGISTRY = 'quay.io'
         QUAY_IO_USERNAME = 'udaykirank'
         QUAY_IO_REPOSITORY_PREFIX = 'csye7125group3/webapp-images' // Customize this as needed
+        IMAGE_NAME = 'webapp'
     }
 
     stages {
@@ -24,12 +25,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Define the image name and tag based on your repository
-                // def imageName = "${env.QUAY_IO_REGISTRY}/${env.QUAY_IO_REPOSITORY_PREFIX}${env.JOB_NAME}"
-                def imageName = "webapp"
+                // def env.IMAGE_NAME = "${env.QUAY_IO_REGISTRY}/${env.QUAY_IO_REPOSITORY_PREFIX}${env.JOB_NAME}"
                 def imageTag = "${BUILD_NUMBER}"
-
                 // Build the Docker image
-                docker.build("-t ${imageName}:${imageTag} .")
+                docker.build("-t ${env.IMAGE_NAME}:${imageTag} .")
             }
         }
 
@@ -44,7 +43,7 @@ pipeline {
         stage('Push Docker Image to Quay.io') {
             steps {
                 docker.withRegistry("${env.QUAY_IO_REGISTRY}", QUAY_IO_CREDENTIALS) {
-                    docker.image("${imageName}:${imageTag}").push()
+                    docker.image("${env.IMAGE_NAME}:${imageTag}").push()
                 }
             }
         }
