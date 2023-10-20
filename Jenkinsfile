@@ -29,7 +29,7 @@ pipeline {
                     def imageName = "${env.QUAY_IO_REGISTRY}/${env.QUAY_IO_REPOSITORY_PREFIX}${env.JOB_NAME}"
                     // def imageTag = "${BUILD_NUMBER}"
                     // Build the Docker image
-                    docker.build(imageName '.')
+                    docker.build(imageName, '.')
                 }
             }
         }
