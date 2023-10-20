@@ -14,9 +14,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                // Checkout source code from your Git repository
+                    // Checkout source code from your Git repository
                     git branch: 'main',
-                        credentialsId: 'github-token-jenkins'
+                        credentialsId: 'github-token-jenkins',
                         url: 'https://github.com/cyse7125-fall2023-group03/webapp.git'
                 }
             }
