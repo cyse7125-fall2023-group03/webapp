@@ -10,7 +10,6 @@ For building and running the application you need:
  - BCrypt 0.3
  - JUnit 4
  - Mockito
- - 
 
 ## Steps to Build, Run & Test 
  
