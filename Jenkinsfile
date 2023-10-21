@@ -43,7 +43,7 @@ pipeline {
     stage('Push Docker Image to Quay.io') {
         steps {
             script {
-                // docker.image('${env.IMAGE_NAME}').push()
+                def latestVersion = sh(returnStdout: true, script: "git describe --tags --abbrev=0").trim()
                 docker.withRegistry("https://quay.io/", QUAY_IO_CREDENTIALS) {
                     docker.image("${env.IMAGE_NAME}:${latestVersion}").push()
                 }
