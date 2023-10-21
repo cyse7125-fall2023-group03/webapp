@@ -1,4 +1,4 @@
-# Cloud Web Applicationrfetgyui
+# Cloud Web Application
 This Project is built using Springboot, Java, Postgresql, Docker.
 
 
@@ -16,8 +16,8 @@ For building and running the application you need:
   - Clone the repository it using ssh.
   - Run the below two queries to set up database. 
   ``` 
-  CREATE DATABASE cbdh;
-  USE cbdh;
+  CREATE DATABASE app;
+  USE app;
    ```
   - mvn clean install && mvn spring-boot:run
   -  PORT :  http://localhost:8080
