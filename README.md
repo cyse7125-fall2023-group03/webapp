@@ -28,7 +28,7 @@ For building and running the application you need:
 ## Github Actions
 Added branch protection by preventing merge if any workflow fails.
 Added unit test cases to the workflow to make sure.
-AMI is bulit when pull request is merged.
+AMI is bulit when push is done.
 
 ## API Endpoints Curls
 
