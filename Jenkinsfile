@@ -21,22 +21,10 @@ pipeline {
       }
     }
 
-    stage('Get Latest GitHub Version') {
-            steps {
-                script {
-                    def response = httpRequest(
-                        url: 'https://api.github.com/repos/cyse7125-fall2023-group03/webapp/releases/latest',
-                        authentication: 'github-token-jenkins' // Use your GitHub token credentials here
-                    )
-                    latestVersion = response.getData().tag_name
-                }
-            }
-        }
-
     stage('Build Image') {
       steps {  
         script {
-        //   def imageName = "myapp"
+          def latestVersion = sh(returnStdout: true, script: "git describe --tags --abbrev=0").trim()
           docker.build("${env.IMAGE_NAME}:${latestVersion}", '.')
         }
       }
