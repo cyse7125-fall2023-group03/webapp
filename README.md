@@ -1,5 +1,5 @@
 # Cloud Web Applicationrfetgyui
-This Project is built using Spring boot, Java, Postgresql, Docker.
+This Project is built using Springboot, Java, Postgresql, Docker.
 
 
 ## Requirements
