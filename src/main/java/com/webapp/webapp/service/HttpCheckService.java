@@ -52,7 +52,7 @@ public class HttpCheckService {
 
 	public ResponseEntity<Object> getHttpCheckById(String id) {
 		try {
-			HttpCheck httpCheck = httpCheckRepository.findById(id);
+			HttpCheck httpCheck = httpCheckRepository.findById(id).get();
 			if (httpCheck == null)
 				return new ResponseEntity<>(HttpStatusCode.valueOf(404));
 			return new ResponseEntity<>(httpCheck, HttpStatusCode.valueOf(200));
@@ -63,7 +63,7 @@ public class HttpCheckService {
 
 	public ResponseEntity<Object> updateHttpCheckById(String id, HttpCheck httpCheckBody) {
 		try {
-			HttpCheck httpCheck = httpCheckRepository.findById(id);
+			HttpCheck httpCheck = httpCheckRepository.findById(id).get();
 			if (httpCheck == null)
 				return new ResponseEntity<>(HttpStatusCode.valueOf(404));
 			httpCheck.setName(httpCheckBody.getName());
@@ -86,10 +86,11 @@ public class HttpCheckService {
 
 	public ResponseEntity<Object> deleteHttpCheckById(String id) {
 		try {
-			HttpCheck httpCheck = httpCheckRepository.findById(id);
+			HttpCheck httpCheck = httpCheckRepository.findById(id).get();
 			if (httpCheck == null)
 				return new ResponseEntity<>(HttpStatusCode.valueOf(404));
-			return new ResponseEntity<>(httpCheckRepository.deleteById(id), HttpStatusCode.valueOf(204));
+			httpCheckRepository.deleteById(id);
+			return new ResponseEntity<>(HttpStatusCode.valueOf(204));
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new ResponseEntity<>(null, HttpStatusCode.valueOf(400));
