@@ -9,7 +9,7 @@ For building and running the application you need:
  - Postgresql
  - BCrypt 0.3
  - JUnit 4
- - Mockito
+ - Mockito 
 
 ## Steps to Build, Run & Test 
  
