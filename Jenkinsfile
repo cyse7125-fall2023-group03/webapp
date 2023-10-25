@@ -26,6 +26,7 @@ pipeline {
         script {
           def latestVersion = sh(returnStdout: true, script: "git describe --tags --abbrev=0").trim()
           docker.build("${env.IMAGE_NAME}:${latestVersion}", '.')
+          docker.build("${env.IMAGE_NAME}:latest", '.')
         }
       }
     }
@@ -46,6 +47,7 @@ pipeline {
                 def latestVersion = sh(returnStdout: true, script: "git describe --tags --abbrev=0").trim()
                 docker.withRegistry("https://quay.io/", QUAY_IO_CREDENTIALS) {
                     docker.image("${env.IMAGE_NAME}:${latestVersion}").push()
+                    docker.image("${env.IMAGE_NAME}:latest").push()
                 }
             }
         }
