@@ -1,6 +1,8 @@
 package com.webapp.webapp.service;
 
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,8 @@ import org.springframework.util.StreamUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import io.fabric8.kubernetes.api.model.GenericKubernetesResource;
 import io.fabric8.kubernetes.client.KubernetesClient;
@@ -26,8 +30,20 @@ public class CustomResourceService {
 			CustomResourceDefinitionContext animalCrdContext = new CustomResourceDefinitionContext.Builder()
 					.withName("animals.jungle.example.com").withGroup("jungle.example.com").withScope("Namespaced")
 					.withVersion("v1").withPlural("animals").build();
-			String crBasicString = loadTemplateFromFile("/crd.yaml");
-			String crdWithDynamicValue = crBasicString.replace("${IMAGE_NAME}", "dsvhbdsv");
+
+			// Load YAML file into String
+			ClassLoader classLoader = getClass().getClassLoader();
+			String yamlString = new String(Files.readAllBytes(Paths.get(classLoader.getResource("crd.yaml").toURI())));
+
+			// Parse YAML into GenericKubernetesResource
+			ObjectMapper yamlReader = new ObjectMapper(new YAMLFactory());
+			GenericKubernetesResource resource = yamlReader.readValue(yamlString, GenericKubernetesResource.class);
+
+//			String crBasicString = loadTemplateFromFile("/crd.yaml");
+//			String crdWithDynamicValue = crBasicString.replace("${IMAGE_NAME}", "dsvhbdsv");
+//			
+//			ObjectMapper yamlReader = new ObjectMapper(new YAMLFactory());
+//			Map<String, Object> crdObj = yamlReader.readValue(crdYamlString, Map.class);
 
 //			GenericKubernetesResource cr1 = client.genericKubernetesResources(animalCrdContext)
 //					.load(CustomResourceService.class.getResourceAsStream("/crd.yml")).get();
@@ -37,9 +53,9 @@ public class CustomResourceService {
 //			String crBasicString = "{" + "  \"apiVersion\": \"jungle.example.com/v1\"," + "  \"kind\": \"Animal\","
 //					+ "  \"metadata\": {" + "    \"name\": \"mongoose\"," + "    \"namespace\": \"default\"" + "  },"
 //					+ "  \"spec\": {" + "    \"image\": \"my-silly-mongoose-image\"" + "  }" + "}";
-			GenericKubernetesResource cr3 = Serialization.jsonMapper().readValue(crdWithDynamicValue,
-					GenericKubernetesResource.class);
-			client.genericKubernetesResources(animalCrdContext).inNamespace(namespace).resource(cr3).create();
+//			GenericKubernetesResource cr3 = Serialization.jsonMapper().readValue(crdWithDynamicValue,
+//					GenericKubernetesResource.class);
+			client.genericKubernetesResources(animalCrdContext).inNamespace(namespace).resource(resource).create();
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
