@@ -1,5 +1,6 @@
 package com.webapp.webapp.service;
 
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,8 +34,11 @@ public class CustomResourceService {
 
 			// Load YAML file into String
 			ClassLoader classLoader = getClass().getClassLoader();
-			String yamlString = new String(Files.readAllBytes(Paths.get(classLoader.getResource("crd.yaml").toURI())));
 
+			InputStream inputStream = classLoader.getResourceAsStream("crd.yaml");
+
+			String yamlString = new String(inputStream.readAllBytes());
+			
 			// Parse YAML into GenericKubernetesResource
 			ObjectMapper yamlReader = new ObjectMapper(new YAMLFactory());
 			GenericKubernetesResource resource = yamlReader.readValue(yamlString, GenericKubernetesResource.class);
