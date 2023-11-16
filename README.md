@@ -1,6 +1,6 @@
 # Cloud Web Application
 This Project is built using Springboot, Java, Postgresql. 
-Docker and Jenkins are installed in the AMI.
+Docker and Jenkins are installed in the AMI..
 
 
 ## Github Actions
