@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webapp.webapp.model.HttpCheck;
+import com.webapp.webapp.service.CustomResourceService;
 import com.webapp.webapp.service.HttpCheckService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,9 +29,13 @@ public class HttpCheckController {
 	@Autowired
 	HttpCheckService httpCheckService;
 
+	@Autowired
+	CustomResourceService cResourceService;
+	
 	@GetMapping("/healthz")
 	public ResponseEntity<Object> checkHealthz() {
 		logger.info("ping for app health check");
+		cResourceService.applyCRDAndCreateCustomResource();
 		return new ResponseEntity<>(HttpStatusCode.valueOf(200));
 	}
 
