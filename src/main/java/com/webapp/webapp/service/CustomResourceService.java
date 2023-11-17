@@ -28,9 +28,13 @@ public class CustomResourceService {
 
 			String namespace = "default";
 
-			CustomResourceDefinitionContext animalCrdContext = new CustomResourceDefinitionContext.Builder()
-					.withName("animals.jungle.example.com").withGroup("jungle.example.com").withScope("Namespaced")
-					.withVersion("v1").withPlural("animals").build();
+			CustomResourceDefinitionContext healthcheckCrdContext = new CustomResourceDefinitionContext.Builder()
+			        .withName("healthchecks.webapp.udaykk.me")  // CRD name
+			        .withGroup("webapp.udaykk.me")  // CRD group
+			        .withScope("Namespaced")
+			        .withVersion("v1")
+			        .withPlural("healthchecks")  // CRD plural name
+			        .build();
 
 			// Load YAML file into String
 			ClassLoader classLoader = getClass().getClassLoader();
@@ -59,7 +63,7 @@ public class CustomResourceService {
 //					+ "  \"spec\": {" + "    \"image\": \"my-silly-mongoose-image\"" + "  }" + "}";
 //			GenericKubernetesResource cr3 = Serialization.jsonMapper().readValue(crdWithDynamicValue,
 //					GenericKubernetesResource.class);
-			client.genericKubernetesResources(animalCrdContext).inNamespace(namespace).resource(resource).create();
+			client.genericKubernetesResources(healthcheckCrdContext).inNamespace(namespace).resource(resource).create();
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
