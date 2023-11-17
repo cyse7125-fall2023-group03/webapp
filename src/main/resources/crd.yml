@@ -1,0 +1,6 @@
+apiVersion: webapp.udaykk.me/v1
+kind: Healthcheck
+metadata:
+  name: healthchecks.webapp.udaykk.me
+spec:
+  foo: "bar1"
