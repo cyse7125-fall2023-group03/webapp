@@ -55,7 +55,6 @@ public class HttpCheck {
 	
 	@Column(name = "check_updated")
 	private String check_updated;
-
 	
 
 	public String getId() {

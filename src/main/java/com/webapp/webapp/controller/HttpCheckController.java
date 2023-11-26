@@ -29,13 +29,9 @@ public class HttpCheckController {
 	@Autowired
 	HttpCheckService httpCheckService;
 
-	@Autowired
-	CustomResourceService cResourceService;
-	
 	@GetMapping("/healthz")
 	public ResponseEntity<Object> checkHealthz() {
 		logger.info("ping for app health check");
-		cResourceService.applyCRDAndCreateCustomResource();
 		return new ResponseEntity<>(HttpStatusCode.valueOf(200));
 	}
 

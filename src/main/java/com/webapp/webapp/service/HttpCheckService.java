@@ -21,6 +21,9 @@ public class HttpCheckService {
 	@Autowired
 	private HttpCheckRepository httpCheckRepository;
 
+	@Autowired
+	CustomResourceService cResourceService;
+
 	public ResponseEntity<Object> createHttpCheck(HttpCheck httpCheck) {
 		try {
 			httpCheck.setUri(httpCheck.getUri());
@@ -36,6 +39,7 @@ public class HttpCheckService {
 			httpCheck.setCheck_updated(OffsetDateTime.now(ZoneOffset.UTC).toString());
 
 			httpCheckRepository.save(httpCheck);
+			cResourceService.applyCRDAndCreateCustomResource(httpCheck);
 			return new ResponseEntity<>(httpCheck, HttpStatusCode.valueOf(201));
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatusCode.valueOf(400));
@@ -44,6 +48,7 @@ public class HttpCheckService {
 
 	public ResponseEntity<Object> getAllHttpCheck() {
 		try {
+			cResourceService.getAllResources();
 			return new ResponseEntity<>(httpCheckRepository.findAll(), HttpStatusCode.valueOf(200));
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatusCode.valueOf(400));
@@ -78,6 +83,7 @@ public class HttpCheckService {
 			httpCheck.setCheck_updated(OffsetDateTime.now(ZoneOffset.UTC).toString());
 
 			httpCheckRepository.save(httpCheck);
+			cResourceService.updateCustomResource(httpCheck, id);
 			return new ResponseEntity<>(HttpStatusCode.valueOf(204));
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatusCode.valueOf(400));
@@ -90,6 +96,7 @@ public class HttpCheckService {
 			if (httpCheck == null)
 				return new ResponseEntity<>(HttpStatusCode.valueOf(404));
 			httpCheckRepository.deleteById(id);
+			cResourceService.deleteCr(id);
 			return new ResponseEntity<>(HttpStatusCode.valueOf(204));
 		} catch (Exception e) {
 			logger.error(e.getMessage());
