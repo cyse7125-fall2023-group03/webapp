@@ -1,0 +1,18 @@
+apiVersion: webapp.udaykk.me/v1
+kind: Healthcheck
+metadata:
+  name: ${metaname}
+spec:
+  foo: "bar112"
+  id: ${ID}
+  name: ${NAME}
+  uri: ${URI}
+  is_paused: ${IS_PAUSED}
+  num_retries: ${NUM_RETRIES}
+  uptime_sla: ${UPTIME_SLA}
+  response_time_sla: ${RESPONSE_TIME_SLA}
+  use_ssl: ${USE_SSL}
+  response_status_code: ${RESPONSE_STATUS_CODE}
+  check_interval_in_seconds: ${CHECK_INTERVAL}
+  check_created: ${CHECK_CREATED}
+  check_updated: ${CHECK_UPDATED}
