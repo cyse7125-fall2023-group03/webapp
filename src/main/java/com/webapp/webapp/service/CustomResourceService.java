@@ -22,7 +22,7 @@ import io.fabric8.kubernetes.client.dsl.base.CustomResourceDefinitionContext;
 @SuppressWarnings("deprecation")
 @Service
 public class CustomResourceService {
-	private final String namespace = "default";
+	private final String namespace = "webapp";
 
 	public void applyCRDAndCreateCustomResource(HttpCheck httpCheck) {
 		try (final KubernetesClient client = new KubernetesClientBuilder().build()) {
@@ -66,7 +66,7 @@ public class CustomResourceService {
 //			GenericKubernetesResource cr = client.genericKubernetesResources(context)
 //					.load(CustomResourceService.class.getResourceAsStream("/cr.yml")).get();
 
-			client.genericKubernetesResources(context).inNamespace("default").resource(resource).create();
+			client.genericKubernetesResources(context).inNamespace(namespace).resource(resource).create();
 
 //			GenericKubernetesResourceList cronTabs = client.genericKubernetesResources(context).inNamespace("default").list();
 //			cronTabs.getItems().stream().map(GenericKubernetesResource::getMetadata).map(ObjectMeta::getName).forEach(logger::info);
