@@ -1,7 +1,7 @@
 # Cloud Web Application
 This Project is built using Springboot, Java, Postgresql. 
 Docker and Jenkins are installed in the AMI.
-The application creates the Custom Resource using client
+The application creates the Custom Resource using client.
 
 
 ## Github Actions
